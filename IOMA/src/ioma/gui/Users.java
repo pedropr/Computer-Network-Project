@@ -7,6 +7,10 @@ public class Users {
     private String ip;
     private ArrayList<Messages> messageList = new ArrayList<Messages>();
 
+    public Users() {
+        this.name = "";
+        this.ip = "";
+    }
     public Users (String name, String ip){
         this.name = name;
         this.ip = ip;
@@ -16,8 +20,16 @@ public class Users {
         return name;
     }
 
+    public String getIp() {
+        return ip;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addMessage(String from, String message) {
+        messageList.add(new Messages(from, message));
     }
 
     @Override
