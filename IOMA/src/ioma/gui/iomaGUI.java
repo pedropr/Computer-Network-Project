@@ -1,30 +1,18 @@
 package ioma.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
-import java.awt.Rectangle;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
+import java.awt.*;
 import java.net.*;
+import java.util.Enumeration;
 
 
 public class iomaGUI extends JFrame {
 
     private JPanel contentPane;
     private DatagramSocket socket;
+    private InetAddress serverIp;
 
 
     /**
@@ -138,6 +126,54 @@ public class iomaGUI extends JFrame {
     }
 
     public void removeUser(String username, String ip){
+
+    }
+
+    public void initializedDiscovery(String username) throws Exception {
+        DatagramSocket socket = new DatagramSocket(40000);
+        byte[] buf = new byte[256];
+        byte[] messageBuf = new byte[1024];
+        Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
+        //Preparing Message to server, to add user.
+        String message = "A:" + username;
+        buf = message.getBytes();
+        //Send Message to broadcast
+        while (interfaces.hasMoreElements()) {
+            NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
+
+            if (networkInterface.isLoopback() || !networkInterface.isUp()) {
+                continue; // Don't want to broadcast to the loopback interface
+            }
+
+            for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
+                InetAddress broadcast = interfaceAddress.getBroadcast();
+                if (broadcast == null) {
+                    continue;
+                }
+
+                // Send the broadcast package!
+                try {
+                    System.out.println(broadcast);
+                    DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, broadcast, 40000);
+                    socket.send(sendPacket);
+
+                } catch (Exception e) {
+
+                }
+            }
+        }
+        Boolean noRecieve = true;
+        while (noRecieve) {
+            System.out.println("Waiting for message...");
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
+            socket.receive(packet);
+            String recieve = new String(packet.getData());
+            System.out.println("Server Response: " + recieve);
+            noRecieve = false; // Stop while loop
+        }
+
+        socket.close();
+
 
     }
 }

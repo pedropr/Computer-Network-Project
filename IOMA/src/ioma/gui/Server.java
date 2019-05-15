@@ -1,6 +1,8 @@
 package ioma.gui;
+
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.util.ArrayList;
 
 public class Server {
@@ -18,14 +20,34 @@ public class Server {
             socket.receive(packet);
             String recieve = new String (packet.getData());
 
-            if(recieve.contains("A: ")){
-                System.out.println("Adding " + recieve + " : " + packet.getAddress());
+            if (recieve.contains("A:")) {
+                System.out.println("New User: " + recieve + " : " + packet.getAddress());
+                //Parse goes here
 
-            }else if(recieve.contains("B: ")){
+
+                //Then send user Previos User added
+                //This will change to for loop
+                String newUser = "A:Carlos";
+                buf = newUser.getBytes();
+                System.out.println("Sending " + newUser + "User to: " + packet.getAddress());
+                DatagramPacket usernamePacket = new DatagramPacket(buf, buf.length, packet.getAddress(), 50000);
+                socket.send(usernamePacket);
+
+                //Then send to broadcast new user added to previous user
+
+            } else if (recieve.contains("B:")) {
                 System.out.println("Removing " + recieve + " : " + packet.getAddress());
+                //Parse goes here
+
+                //Then send user to Added user
+
+
+                //Then add user to other client
+
+
 
             }else{
-                System.out.println("Other info");
+                System.out.print("Other info: ");
                 System.out.println(recieve);
             }
         }

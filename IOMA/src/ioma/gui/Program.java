@@ -17,13 +17,20 @@ public class Program {
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 String recieved = new String(packet.getData());
-                System.out.println("IP address: " + packet.getAddress());
+                System.out.println("Got Message from: IP address: " + packet.getAddress() + "Port: " + packet.getPort());
                 if (recieved.contains("A:")) { // This to add a user.
+                    System.out.println("Adding user: " + recieved + " with ip: " + packet.getAddress());
 
+                    //Here goes parse
+                    frame.addUser(recieved, packet.getAddress().toString());
                 } else if (recieved.contains("R: ")){ //This to remove a user
+                    System.out.println("Removing user:" + recieved + " with ip: " + packet.getAddress());
+                    //Here goes parse
 
+                    frame.removeUser(recieved, packet.getAddress().toString());
                 } else { // recieve message
                     frame.recieveMessage(recieved , packet.getAddress().toString());
+
                 }
                 System.out.println("Recieved packet: " + recieved);
 

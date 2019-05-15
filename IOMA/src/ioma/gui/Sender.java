@@ -1,7 +1,6 @@
 import java.net.*;
-import java.io.*;
-import java.util.Scanner;
 import java.util.Enumeration;
+import java.util.Scanner;
 
 public class Sender {
     public static void main (String[] args) throws Exception {
@@ -11,14 +10,10 @@ public class Sender {
             Scanner scanner = new Scanner(System.in);
 
             //Username
-            System.out.println("What is your username? \n");
+        System.out.println("What message you want send? \n");
             String user = scanner.nextLine();
             buf = user.getBytes ();
-            InetAddress address = InetAddress.getByName ("10.0.0.61");
 
-            //Constructs a datagram packet for sending packets of length buf.length to the specified port number on the specified host.
-            DatagramPacket usernamePacket = new DatagramPacket (buf, buf.length, address, 40000);
-            socket.send(usernamePacket);
 
             Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
             while (interfaces.hasMoreElements()) {
