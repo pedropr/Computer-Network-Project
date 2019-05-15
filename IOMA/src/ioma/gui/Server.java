@@ -19,7 +19,7 @@ public class Server {
             DatagramPacket packet = new DatagramPacket (buf, buf.length);
             socket.receive(packet);
             String recieve = new String (packet.getData());
-
+            System.out.println("Message recieve: " + recieve);
             if (recieve.contains("A:")) {
                 System.out.println("New User: " + recieve + " : " + packet.getAddress());
                 String newUser = recieve;
@@ -31,7 +31,7 @@ public class Server {
                 //This will change to for loop
                 String prevUser = "A:Carlos";
                 buf = prevUser.getBytes();
-                System.out.println("Sending " + newUser + "User to: " + packet.getAddress());
+                System.out.println("Sending " + prevUser + "User to: " + packet.getAddress());
                 DatagramPacket usernamePacket = new DatagramPacket(buf, buf.length, packet.getAddress(), 50000);
                 socket.send(usernamePacket);
 
