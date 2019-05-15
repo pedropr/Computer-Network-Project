@@ -31,7 +31,7 @@ public class Server {
                 //This will change to for loop
                 String prevUser = "A:Carlos";
                 buf = prevUser.getBytes();
-                System.out.println("Sending " + newUser + "User to: " + packet.getAddress());
+                System.out.println("Sending " + prevUser + "User to: " + packet.getAddress());
                 DatagramPacket usernamePacket = new DatagramPacket(buf, buf.length, packet.getAddress(), 50000);
                 socket.send(usernamePacket);
 
