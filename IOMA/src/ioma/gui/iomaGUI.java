@@ -14,7 +14,7 @@ public class iomaGUI extends JFrame {
     private JPanel contentPane;
     private DatagramSocket socket;
     private InetAddress serverIp;
-    private ArrayList<Users> userList = new ArrayList<User>(); // Contains all the avaible user
+    private ArrayList<Users> userList = new ArrayList<Users>(); // Contains all the avaible user
     private Users thisUser = new Users(); //Himself
 
 

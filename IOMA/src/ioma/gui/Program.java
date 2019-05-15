@@ -31,6 +31,7 @@ public class Program {
                     frame.removeUser(received, packet.getAddress().toString());
                 } else { // recieve message
                     System.out.println("Message Receive: " + received);
+
                     frame.recieveMessage(received, packet.getAddress().toString());
 
                 }
