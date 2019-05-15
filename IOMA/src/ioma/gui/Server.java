@@ -19,7 +19,7 @@ public class Server {
             DatagramPacket packet = new DatagramPacket (buf, buf.length);
             socket.receive(packet);
             String recieve = new String (packet.getData());
-
+            System.out.println("Message recieve: " + recieve);
             if (recieve.contains("A:")) {
                 System.out.println("New User: " + recieve + " : " + packet.getAddress());
                 String newUser = recieve;
