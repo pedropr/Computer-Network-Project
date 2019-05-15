@@ -24,12 +24,13 @@ public class Server {
                 System.out.println("New User: " + recieve + " : " + packet.getAddress());
                 String newUser = recieve;
                 //Parse goes here
-
-
+                String username = newUser.substring(2);
+                System.out.println(username);
 
                 //Then send user Previos User added
                 //This will change to for loop
-                String prevUser = "A:Carlos";
+                String prevUser = "A:CarlosIP:10.11.12.11";
+                buf = new byte[256];
                 buf = prevUser.getBytes();
                 System.out.println("Sending " + prevUser + "User to: " + packet.getAddress());
                 DatagramPacket usernamePacket = new DatagramPacket(buf, buf.length, packet.getAddress(), 50000);
@@ -53,6 +54,8 @@ public class Server {
                         // Send the broadcast package!
                         try {
                             System.out.println("Send the new user added to chat: " + recieve + " to broadcast " + broadcast);
+                            recieve = recieve + " IP:" + packet.getAddress().toString();
+                            buf = new byte[256];
                             buf = recieve.getBytes();
                             DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, broadcast, 50000);
                             socket.send(sendPacket);
@@ -62,11 +65,13 @@ public class Server {
                         }
                     }
                 }
-            } else if (recieve.contains("B:")) {
+            } else if (recieve.contains("R:")) {
                 System.out.println("Removing " + recieve + " : " + packet.getAddress());
                 //Parse goes here
 
                 //Then send user to remove user to broadcast
+                
+                
 
                 Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
                 while (interfaces.hasMoreElements()) {
@@ -85,6 +90,8 @@ public class Server {
                         // Send the broadcast package!
                         try {
                             System.out.println("Send remove user to client: " + recieve + " to broadcast " + broadcast);
+                            buf = new byte[256];
+                            recieve = recieve + " IP:" + packet.getAddress().toString();
                             buf = recieve.getBytes();
                             DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, broadcast, 50000);
                             socket.send(sendPacket);

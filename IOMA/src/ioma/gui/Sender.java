@@ -1,3 +1,5 @@
+package ioma.gui;
+
 import java.net.*;
 import java.util.Enumeration;
 import java.util.Scanner;

@@ -20,21 +20,39 @@ public class Program {
                 String received = new String(packet.getData());
                 System.out.println("Got Message from: IP address: " + packet.getAddress() + "Port: " + packet.getPort());
                 if (received.contains("A:")) { // This to add a user.
-                    System.out.println("Adding user: " + received + " with ip: " + packet.getAddress());
-
-                    //Here goes parse
-                    frame.addUser(received, packet.getAddress().toString());
-                } else if (received.contains("R: ")) { //This to remove a user
-                    System.out.println("Removing user:" + received + " with ip: " + packet.getAddress());
-                    //Here goes parse
-
-                    frame.removeUser(received, packet.getAddress().toString());
+                    //here goes parser
+                                    
+                    String [] arrOfStr = received.split("IP:"); 
+                    String username = arrOfStr[0].replaceFirst("A:", "");
+                    String ip = "";
+                    int counter = 0;
+                    for(String a:arrOfStr) {
+                      if(counter == 1)
+                        ip = a;
+                    counter++;
+                    }
+                    System.out.println("Username: " + username + " IP address: " + ip);
+                      
+                    //frame.addUser(username, packet.getAddress().toString());
+                    
+                } else if (received.contains("R:")) { //This to remove a user
+                    //Here goes parser
+                  String [] arrOfStr = received.split("IP:"); 
+                  String username = arrOfStr[0].replaceFirst("R:", "");
+                  String ip = "";
+                  int counter = 0;
+                  for(String a:arrOfStr) {
+                    if(counter == 1)
+                      ip = a;
+                  counter++;
+                  }
+                  System.out.println("Username: " + username + " IP address: " + ip);
+                    //frame.removeUser(username, packet.getAddress().toString());
+                  
                 } else { // recieve message
-                    System.out.println("Message Receive: " + received);
+                    System.out.println("Message Received: " + received);
                     frame.recieveMessage(received, packet.getAddress().toString());
-
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
