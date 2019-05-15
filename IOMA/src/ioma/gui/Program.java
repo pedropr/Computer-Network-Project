@@ -13,26 +13,27 @@ public class Program {
         try {
             System.out.println("this running");
             byte[] buf = new byte[256];
-            while (true) {
+            while (frame.isVisible()) {
+                System.out.println("Waiting message ... ");
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
-                String recieved = new String(packet.getData());
+                String received = new String(packet.getData());
                 System.out.println("Got Message from: IP address: " + packet.getAddress() + "Port: " + packet.getPort());
-                if (recieved.contains("A:")) { // This to add a user.
-                    System.out.println("Adding user: " + recieved + " with ip: " + packet.getAddress());
+                if (received.contains("A:")) { // This to add a user.
+                    System.out.println("Adding user: " + received + " with ip: " + packet.getAddress());
 
                     //Here goes parse
-                    frame.addUser(recieved, packet.getAddress().toString());
-                } else if (recieved.contains("R: ")){ //This to remove a user
-                    System.out.println("Removing user:" + recieved + " with ip: " + packet.getAddress());
+                    frame.addUser(received, packet.getAddress().toString());
+                } else if (received.contains("R: ")) { //This to remove a user
+                    System.out.println("Removing user:" + received + " with ip: " + packet.getAddress());
                     //Here goes parse
 
-                    frame.removeUser(recieved, packet.getAddress().toString());
+                    frame.removeUser(received, packet.getAddress().toString());
                 } else { // recieve message
-                    frame.recieveMessage(recieved , packet.getAddress().toString());
+                    System.out.println("Message Receive: " + received);
+                    frame.recieveMessage(received, packet.getAddress().toString());
 
                 }
-                System.out.println("Recieved packet: " + recieved);
 
             }
         } catch (Exception e) {
