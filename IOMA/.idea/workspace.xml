@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="66c90d0b-6d4e-4314-81e5-408daa94540c" name="Default Changelist" comment="Is working">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ioma/gui/iomaGUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ioma/gui/iomaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ioma/gui/iomaGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ioma/gui/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ioma/gui/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ioma/gui/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ioma/gui/iomaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/iomaGUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="66c90d0b-6d4e-4314-81e5-408daa94540c" name="Default Changelist" comment="Is working" />
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,7 +18,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/Program.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
+            <state relative-caret-position="323">
               <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -39,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/Server.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+              <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/Sender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="34" column="100" lean-forward="true" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
+            <state relative-caret-position="544">
+              <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,7 +68,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
+            <state relative-caret-position="2567">
               <caret line="156" column="100" selection-start-line="156" selection-start-column="100" selection-end-line="156" selection-end-column="100" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -110,10 +102,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="1938" />
+    <option name="height" value="1058" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -168,7 +160,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Sender">
     <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ioma.gui.Program" />
       <module name="IOMA" />
@@ -217,8 +209,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Server" />
         <item itemvalue="Application.Sender" />
+        <item itemvalue="Application.Server" />
         <item itemvalue="Application.Program" />
         <item itemvalue="Application.iomaGUI" />
       </list>
@@ -237,6 +229,7 @@
       <workItem from="1557884783563" duration="12000" />
       <workItem from="1557884990167" duration="8092000" />
       <workItem from="1557901473082" duration="3407000" />
+      <workItem from="1557935323171" duration="372000" />
     </task>
     <task id="LOCAL-00001" summary="set up commit">
       <created>1557902909419</created>
@@ -249,7 +242,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11511000" />
+    <option name="totallyTimeSpent" value="11883000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -261,8 +254,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.18176973" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -273,7 +265,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34994584" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3493635" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -363,10 +355,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java">
+    <entry file="file://$PROJECT_DIR$/src/ioma/gui/Program.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="156" column="100" selection-start-line="156" selection-start-column="100" selection-end-line="156" selection-end-column="100" />
+        <state relative-caret-position="323">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -387,18 +379,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ioma/gui/Sender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="34" column="100" lean-forward="true" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
+        <state relative-caret-position="544">
+          <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ioma/gui/Program.java">
+    <entry file="file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
+        <state relative-caret-position="2567">
+          <caret line="156" column="100" selection-start-line="156" selection-start-column="100" selection-end-line="156" selection-end-column="100" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -408,7 +400,7 @@
     <entry file="file://$PROJECT_DIR$/src/ioma/gui/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
