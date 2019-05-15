@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 
@@ -13,6 +14,8 @@ public class iomaGUI extends JFrame {
     private JPanel contentPane;
     private DatagramSocket socket;
     private InetAddress serverIp;
+    private ArrayList<Users> userList = new ArrayList<User>(); // Contains all the avaible user
+    private Users thisUser = new Users(); //Himself
 
 
     /**
@@ -118,21 +121,40 @@ public class iomaGUI extends JFrame {
     }
     public void recieveMessage(String message, String ip){
         System.out.println(message + "from: " +ip);
+        for (Users user : userList) {
+            if (user.getIp().equals(ip)) {
+                user.addMessage(user.getName(), message);
+                break;
+            }
+        }
 
     }
+
 
     public void addUser(String username, String ip){
 
+        if (!thisUser.equals(new Users(username, ip))) {
+            if (!userList.contains(new Users(username, ip))) {
+                userList.add(new Users(username, ip));
+                //Add part to add user to list of gui
+            }
+        } else {
+            System.out.println("User: " + username + " already add, ignoring message");
+        }
     }
 
     public void removeUser(String username, String ip){
+        if (userList.contains(new Users(username, ip))) {
+            userList.remove(new Users(username, ip));
+            //Add part to remove user list of the gui
+
+        }
 
     }
 
     public void initializedDiscovery(String username) throws Exception {
         DatagramSocket socket = new DatagramSocket(40000);
         byte[] buf = new byte[256];
-        byte[] messageBuf = new byte[1024];
         Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
         //Preparing Message to server, to add user.
         String message = "A:" + username;
@@ -161,15 +183,6 @@ public class iomaGUI extends JFrame {
 
                 }
             }
-        }
-        Boolean noRecieve = true;
-        while (noRecieve) {
-            System.out.println("Waiting for message...");
-            DatagramPacket packet = new DatagramPacket(buf, buf.length);
-            socket.receive(packet);
-            String recieve = new String(packet.getData());
-            System.out.println("Server Response: " + recieve);
-            noRecieve = false; // Stop while loop
         }
 
         socket.close();
