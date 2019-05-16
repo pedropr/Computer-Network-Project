@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -14,14 +17,21 @@ public class iomaGUI extends JFrame {
     private JPanel contentPane;
     private DatagramSocket socket;
     private InetAddress serverIp;
+    private int clientPort = 50000;
+    private int serverPort = 40000;
     private ArrayList<Users> userList = new ArrayList<Users>(); // Contains all the avaible user
     private Users thisUser = new Users(); //Himself
+    private JList<String> peersTextPane;
+    private JTextPane chatAreaTextPane;
+
+    DefaultListModel<String> model = new DefaultListModel<>();
 
 
     /**
      * Create the frame.
      */
     public iomaGUI(DatagramSocket socket) {
+
         this.socket = socket;
         setTitle("Inter Office Messaging Application v.1");
         setLocationRelativeTo(null);
@@ -68,6 +78,16 @@ public class iomaGUI extends JFrame {
         JButton btnSend = new JButton("Send");
         btnSend.setBackground(new Color(51, 255, 102));
         btnSend.setBounds(645, 572, 72, 119);
+        btnSend.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                /***************************************************************************************************************
+                 HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
+                 */
+                System.out.println("SENDING MESSAGE");
+
+            }
+        });
         contentPane.add(btnSend);
 
         JSeparator separator_2 = new JSeparator();
@@ -88,7 +108,8 @@ public class iomaGUI extends JFrame {
         chatAreaTextPane.setBounds(235, 67, 482, 475);
         contentPane.add(chatAreaTextPane);
 
-        JTextPane peersTextPane = new JTextPane();
+        //PEERS LIST
+        peersTextPane = new JList<>(model);
         peersTextPane.setBorder(new LineBorder(new Color(0, 0, 0)));
         peersTextPane.setBounds(12, 67, 200, 475);
         contentPane.add(peersTextPane);
@@ -96,6 +117,16 @@ public class iomaGUI extends JFrame {
         JButton btnDownload = new JButton("Download all messages");
         btnDownload.setBackground(new Color(255, 204, 51));
         btnDownload.setBounds(12, 657, 200, 34);
+        btnDownload.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                /***************************************************************************************************************
+                 HERE GOES THE FUNCTION FOR DOWNLOAD THE MESSAGES TO A FILE
+                 */
+                System.out.println("DOWNLOADING");
+
+            }
+        });
         contentPane.add(btnDownload);
 
         JSeparator separator_3 = new JSeparator();
@@ -103,10 +134,20 @@ public class iomaGUI extends JFrame {
         separator_3.setBounds(12, 555, 200, 2);
         contentPane.add(separator_3);
 
-        JButton btnStartConnection = new JButton("Disconnect");
-        btnStartConnection.setBackground(Color.RED);
-        btnStartConnection.setBounds(12, 614, 200, 34);
-        contentPane.add(btnStartConnection);
+        JButton btnDisconnect = new JButton("Disconnect");
+        btnDisconnect.setBackground(Color.RED);
+        btnDisconnect.setBounds(12, 614, 200, 34);
+        btnDisconnect.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                /***************************************************************************************************************
+                 HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
+                 */
+                System.out.println("DISCONNECTING");
+
+            }
+        });
+        contentPane.add(btnDisconnect);
 
         JSeparator separator_4 = new JSeparator();
         separator_4.setForeground(new Color(255, 255, 255));
@@ -117,6 +158,24 @@ public class iomaGUI extends JFrame {
         JButton button = new JButton("Start Connection");
         button.setBackground(Color.GREEN);
         button.setBounds(12, 572, 200, 34);
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent arg0) {
+                String username = JOptionPane.showInputDialog("Enter your username");
+                thisUser.setName(username);
+
+                try {
+                    String myIp = realMachineIp();
+                    thisUser.setIp(myIp);
+                    model.addElement(thisUser.getName());
+                    initializedDiscovery(username);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
         contentPane.add(button);
     }
     public void recieveMessage(String message, String ip){
@@ -136,6 +195,8 @@ public class iomaGUI extends JFrame {
         if (!thisUser.equals(new Users(username, ip))) {
             if (!userList.contains(new Users(username, ip))) {
                 userList.add(new Users(username, ip));
+                System.out.println("Adding" + username);
+                //peersTextPane.setText(peersTextPane.getText() + "\n" + username + " " + ip);
                 //Add part to add user to list of gui
             }
         } else {
@@ -153,7 +214,7 @@ public class iomaGUI extends JFrame {
     }
 
     public void initializedDiscovery(String username) throws Exception {
-        DatagramSocket socket = new DatagramSocket(40000);
+        DatagramSocket socket = new DatagramSocket();
         byte[] buf = new byte[256];
         Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
         //Preparing Message to server, to add user.
@@ -176,7 +237,7 @@ public class iomaGUI extends JFrame {
                 // Send the broadcast package!
                 try {
                     System.out.println(broadcast);
-                    DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, broadcast, 40000);
+                    DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, broadcast, serverPort);
                     socket.send(sendPacket);
 
                 } catch (Exception e) {
@@ -188,5 +249,14 @@ public class iomaGUI extends JFrame {
         socket.close();
 
 
+    }
+
+    //Find the real IP of this machine
+    public String realMachineIp() throws IOException {
+        DatagramSocket socket = new DatagramSocket();
+        socket.connect(InetAddress.getByName("8.8.8.8"), 40001);
+        String ip = socket.getLocalAddress().getHostAddress();
+        socket.close();
+        return ip;
     }
 }

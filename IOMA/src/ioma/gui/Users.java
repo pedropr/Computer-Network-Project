@@ -16,6 +16,9 @@ public class Users {
         this.ip = ip;
     }
 
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
     public String getName() {
         return name;
     }
