@@ -237,6 +237,9 @@ public class iomaGUI extends JFrame {
         System.out.println("Message from another client: " + message + " from: " + ip);
         for (Users user : userList) {
             if (user.getIp().equals(ip)) {
+                System.out.println("Checking Here!!!!");
+                System.out.println(user.getName());
+                System.out.println(message);
                 user.addMessage(user.getName(), message);
                 if (peersTextPane.getSelectedValue().contains(user.getName())) {
                     chatAreaTextPane.setText(chatAreaTextPane.getText() + "\n" + user.getName() + " : " + message);
@@ -244,6 +247,11 @@ public class iomaGUI extends JFrame {
                 break;
             }
         }
+        for (Users user : userList) {
+            System.out.println(user.getMessageList());
+        }
+
+
 
     }
 

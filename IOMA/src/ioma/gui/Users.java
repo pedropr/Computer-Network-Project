@@ -36,6 +36,7 @@ public class Users {
     }
 
     public void addMessage(String from, String message) {
+
         messageList.add(new Messages(from, message));
     }
 

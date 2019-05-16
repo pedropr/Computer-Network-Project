@@ -6,7 +6,7 @@ public class Messages {
 
     public Messages(String from, String messages){
         this.from = from;
-        this.from = messages;
+        this.messages = messages;
     }
 
     public String getFrom() {
@@ -23,5 +23,12 @@ public class Messages {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    @Override
+    public String toString() {
+        return "Messages{" +
+                "from='" + from + '\'' +
+                '}';
     }
 }

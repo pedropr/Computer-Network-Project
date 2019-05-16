@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="66c90d0b-6d4e-4314-81e5-408daa94540c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ioma/gui/Program.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ioma/gui/Program.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ioma/gui/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ioma/gui/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/ioma/gui/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ioma/gui/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/ioma/gui/Messages.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ioma/gui/Messages.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/ioma/gui/iomaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/ioma/gui/iomaGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ioma/gui/Messages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Messages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ioma/gui/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ioma/gui/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ioma/gui/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ioma/gui/iomaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ioma/gui/iomaGUI.java" afterDir="false" />
     </list>
@@ -29,7 +25,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/Program.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
+            <state relative-caret-position="782">
               <caret line="48" column="87" selection-start-line="48" selection-start-column="87" selection-end-line="48" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -50,34 +46,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
-              <caret line="110" column="43" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
+              <caret line="242" column="44" selection-start-line="242" selection-start-column="37" selection-end-line="242" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3148#4694#0" expanded="true" />
-                <element signature="e#4693#4694#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/Messages.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+            <state relative-caret-position="399">
+              <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
               <folding>
+                <element signature="e#241#242#0" expanded="true" />
                 <element signature="e#268#269#0" expanded="true" />
-                <element signature="e#295#296#0" expanded="true" />
-                <element signature="e#333#334#0" expanded="true" />
-                <element signature="e#363#364#0" expanded="true" />
-                <element signature="e#414#415#0" expanded="true" />
-                <element signature="e#453#454#0" expanded="true" />
-                <element signature="e#335#336#0" expanded="true" />
-                <element signature="e#367#368#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,17 +74,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ioma/gui/Users.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+            <state relative-caret-position="467">
+              <caret line="39" column="50" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#201#211#0" expanded="true" />
                 <element signature="e#420#421#0" expanded="true" />
                 <element signature="e#448#449#0" expanded="true" />
-                <element signature="e#686#687#0" expanded="true" />
-                <element signature="e#724#725#0" expanded="true" />
-                <element signature="e#690#691#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,17 +101,17 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/ioma/gui/Sender.java" />
+        <option value="$PROJECT_DIR$/src/ioma/gui/Program.java" />
         <option value="$PROJECT_DIR$/src/ioma/gui/Server.java" />
         <option value="$PROJECT_DIR$/src/ioma/gui/Users.java" />
-        <option value="$PROJECT_DIR$/src/ioma/gui/Messages.java" />
-        <option value="$PROJECT_DIR$/src/ioma/gui/Program.java" />
         <option value="$PROJECT_DIR$/src/ioma/gui/iomaGUI.java" />
+        <option value="$PROJECT_DIR$/src/ioma/gui/Messages.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="8" />
-    <option name="y" value="-18" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -138,6 +121,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,8 +145,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -172,7 +155,6 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -254,8 +236,8 @@
       <updated>1557884777552</updated>
       <workItem from="1557884783563" duration="12000" />
       <workItem from="1557884990167" duration="8092000" />
-      <workItem from="1557901473082" duration="17916000" />
-      <workItem from="1557984027343" duration="10039000" />
+      <workItem from="1557901473082" duration="10140000" />
+      <workItem from="1558020342115" duration="725000" />
     </task>
     <task id="LOCAL-00001" summary="set up commit">
       <created>1557902909419</created>
@@ -303,7 +285,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36059000" />
+    <option name="totallyTimeSpent" value="19245000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -318,7 +300,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18336888" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18550107" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -328,7 +310,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.34994584" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -389,7 +371,8 @@
     <MESSAGE value="Change to server to handle everypossible posibily, need to add parse" />
     <MESSAGE value="Small fix of incorect variable send" />
     <MESSAGE value="Implementation of recieve message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementation of recieve message" />
+    <MESSAGE value="Huge Change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Huge Change" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -404,18 +387,6 @@
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java</url>
-          <line>258</line>
-          <properties />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ioma/gui/Program.java</url>
-          <line>32</line>
-          <properties />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -423,7 +394,20 @@
     <entry file="file://$PROJECT_DIR$/src/ioma/gui/Sender.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
-          <caret line="42" column="13" selection-start-line="42" selection-end-line="42" selection-end-column="13" />
+          <caret line="40" column="17" selection-start-line="17" selection-start-column="12" selection-end-line="40" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ioma/gui/Program.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="48" column="87" selection-start-line="48" selection-start-column="87" selection-end-line="48" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -437,58 +421,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ioma/gui/Program.java">
+    <entry file="file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="48" column="87" selection-start-line="48" selection-start-column="87" selection-end-line="48" selection-end-column="87" />
+        <state relative-caret-position="468">
+          <caret line="242" column="44" selection-start-line="242" selection-start-column="37" selection-end-line="242" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ioma/gui/Messages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-          <folding>
-            <element signature="e#268#269#0" expanded="true" />
-            <element signature="e#295#296#0" expanded="true" />
-            <element signature="e#333#334#0" expanded="true" />
-            <element signature="e#363#364#0" expanded="true" />
-            <element signature="e#414#415#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-            <element signature="e#335#336#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ioma/gui/Users.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+        <state relative-caret-position="467">
+          <caret line="39" column="50" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#201#211#0" expanded="true" />
             <element signature="e#420#421#0" expanded="true" />
             <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#686#687#0" expanded="true" />
-            <element signature="e#724#725#0" expanded="true" />
-            <element signature="e#690#691#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ioma/gui/iomaGUI.java">
+    <entry file="file://$PROJECT_DIR$/src/ioma/gui/Messages.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="110" column="43" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
+        <state relative-caret-position="399">
+          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3148#4694#0" expanded="true" />
-            <element signature="e#4693#4694#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#268#269#0" expanded="true" />
           </folding>
         </state>
       </provider>
