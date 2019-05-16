@@ -1,5 +1,5 @@
 package ioma.gui;
-import java.util.ArrayList;
+
 public class Messages {
     private String from;
     private String  messages;
@@ -11,6 +11,14 @@ public class Messages {
 
     public String getFrom() {
         return from;
+    }
+
+    public String getMessages() {
+        return messages;
+    }
+
+    public void setMessages(String messages) {
+        this.messages = messages;
     }
 
     public void setFrom(String from) {

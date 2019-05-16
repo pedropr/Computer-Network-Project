@@ -12,46 +12,41 @@ public class Program {
 
         try {
             System.out.println("this running");
-            byte[] buf = new byte[256];
+
             while (frame.isVisible()) {
+                byte[] buf = new byte[256];
                 System.out.println("Waiting message ... ");
                 DatagramPacket packet = new DatagramPacket(buf, buf.length);
                 socket.receive(packet);
                 String received = new String(packet.getData());
-                System.out.println("Got Message from: IP address: " + packet.getAddress() + "Port: " + packet.getPort());
-                if (received.contains("A:")) { // This to add a user.
+                System.out.println("Got Message. Message contains: " + received);
+                frame.setServerIP(packet.getAddress().getHostAddress());
+                if (received.contains("A:")) {// This to add a user.
                     //here goes parser
+                    System.out.println("***ADDING****");
 
-                    String[] arrOfStr = received.split("IP:");
-                    String username = arrOfStr[0].replaceFirst("A:", "");
-                    String ip = "";
-                    int counter = 0;
-                    for (String a : arrOfStr) {
-                        if (counter == 1)
-                            ip = a;
-                        counter++;
-                    }
-                    System.out.println("Username: " + username + " IP address: " + ip);
+                    String[] arrOfStr = received.split("A:");
+                    System.out.println(arrOfStr.length);
+                    String username = arrOfStr[1];
+                    String address = arrOfStr[0].replaceFirst("IP:", "");
 
-                    //frame.addUser(username, packet.getAddress().toString());
+                    //System.out.println("Adding Username: " + username + " IP address: " + ip);
+
+                    frame.addUser(username, address);
 
                 } else if (received.contains("R:")) { //This to remove a user
                     //Here goes parser
-                    String[] arrOfStr = received.split("IP:");
-                    String username = arrOfStr[0].replaceFirst("R:", "");
-                    String ip = "";
-                    int counter = 0;
-                    for (String a : arrOfStr) {
-                        if (counter == 1)
-                            ip = a;
-                        counter++;
-                    }
-                    System.out.println("Username: " + username + " IP address: " + ip);
-                    //frame.removeUser(username, packet.getAddress().toString());
+                    System.out.println("***REMOVING****");
+
+                    String[] arrOfStr = received.split("R:");
+                    System.out.println(arrOfStr.length);
+                    String username = arrOfStr[1];
+                    String address = arrOfStr[0].replaceFirst("IP:", "");
+                    frame.removeUser(username, address);
                   
                 } else { // recieve message
                     System.out.println("Message Received: " + received);
-                    frame.recieveMessage(received, packet.getAddress().toString());
+                    frame.recieveMessage(received, packet.getAddress().getHostAddress());
                 }
             }
         } catch (Exception e) {

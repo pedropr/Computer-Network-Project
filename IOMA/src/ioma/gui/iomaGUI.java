@@ -3,6 +3,8 @@ package ioma.gui;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,6 +25,7 @@ public class iomaGUI extends JFrame {
     private Users thisUser = new Users(); //Himself
     private JList<String> peersTextPane;
     private JTextPane chatAreaTextPane;
+    private JTextArea messageTextArea;
 
     DefaultListModel<String> model = new DefaultListModel<>();
 
@@ -84,7 +87,33 @@ public class iomaGUI extends JFrame {
                 /***************************************************************************************************************
                  HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
                  */
-                System.out.println("SENDING MESSAGE");
+                try {
+                    String sendMessage = messageTextArea.getText();
+                    int location = peersTextPane.getSelectedIndex();
+                    String to = model.getElementAt(location);
+                    System.out.println("Checking here");
+                    System.out.println(to);
+                    String[] items = to.split(" IP: ");
+                    InetAddress ipto = InetAddress.getByName(items[1]);
+                    byte[] sendBuff = sendMessage.getBytes();
+                    DatagramSocket socket = new DatagramSocket();
+
+
+                    chatAreaTextPane.setText(chatAreaTextPane.getText() + "\n" + thisUser.getName() + " : " + sendMessage);
+                    for (Users user : userList) {
+                        if (user.getName().equals(items[0])) {
+                            System.out.println("Sending to " + user.getName() + " with: " + sendMessage);
+                            user.addMessage(user.getName(), sendMessage);
+                            DatagramPacket packet = new DatagramPacket(sendBuff, sendBuff.length, ipto, clientPort);
+                            socket.send(packet);
+                            socket.close();
+                            //System.out.println("SENDING MESSAGE");
+                        }
+                    }
+                    messageTextArea.setText("");
+                } catch (Exception e) {
+
+                }
 
             }
         });
@@ -95,14 +124,14 @@ public class iomaGUI extends JFrame {
         separator_2.setBounds(235, 555, 482, 2);
         contentPane.add(separator_2);
 
-        JTextArea messageTextArea = new JTextArea();
+        messageTextArea = new JTextArea();
         messageTextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
         messageTextArea.setBounds(235, 572, 398, 119);
         messageTextArea.setLineWrap(true);
         messageTextArea.setWrapStyleWord(true);
         contentPane.add(messageTextArea);
 
-        JTextPane chatAreaTextPane = new JTextPane();
+        chatAreaTextPane = new JTextPane();
         chatAreaTextPane.setBackground(new Color(176, 224, 230));
         chatAreaTextPane.setBorder(new LineBorder(null));
         chatAreaTextPane.setBounds(235, 67, 482, 475);
@@ -112,6 +141,23 @@ public class iomaGUI extends JFrame {
         peersTextPane = new JList<>(model);
         peersTextPane.setBorder(new LineBorder(new Color(0, 0, 0)));
         peersTextPane.setBounds(12, 67, 200, 475);
+        peersTextPane.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    String selected = peersTextPane.getSelectedValue().toString();
+                    System.out.println("Value: " + selected);
+                    String[] temp = selected.split(" IP: ");
+                    int location = userList.indexOf(new Users(temp[0], temp[1]));
+                    ArrayList<Messages> listOfMessage = userList.get(location).getMessageList();
+                    chatAreaTextPane.setText("");
+                    for (Messages message : listOfMessage) {
+                        chatAreaTextPane.setText(chatAreaTextPane.getText() + message.getFrom() + ": " + message.getMessages() + "\n");
+                    }
+                    //System.out.println(location);
+                }
+            }
+        });
         contentPane.add(peersTextPane);
 
         JButton btnDownload = new JButton("Download all messages");
@@ -143,8 +189,19 @@ public class iomaGUI extends JFrame {
                 /***************************************************************************************************************
                  HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
                  */
-                System.out.println("DISCONNECTING");
+                try {
+                    String sendMessage = "R:" + thisUser.getName();
+                    byte[] sendBuff = sendMessage.getBytes();
+                    DatagramSocket socket = new DatagramSocket();
+                    DatagramPacket packet = new DatagramPacket(sendBuff, sendBuff.length, serverIp, serverPort);
+                    socket.send(packet);
+                    socket.close();
+                    System.out.println("DISCONNECTING");
+                    //setVisible(false);
 
+                } catch (Exception e) {
+
+                }
             }
         });
         contentPane.add(btnDisconnect);
@@ -162,13 +219,11 @@ public class iomaGUI extends JFrame {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 String username = JOptionPane.showInputDialog("Enter your username");
-                thisUser.setName(username);
 
                 try {
-                    String myIp = realMachineIp();
-                    thisUser.setIp(myIp);
-                    model.addElement(thisUser.getName());
+                    System.out.println("Sending my connection to server, Waiting for response");
                     initializedDiscovery(username);
+                    thisUser.setName(username);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -179,10 +234,13 @@ public class iomaGUI extends JFrame {
         contentPane.add(button);
     }
     public void recieveMessage(String message, String ip){
-        System.out.println(message + "from: " +ip);
+        System.out.println("Message from another client: " + message + " from: " + ip);
         for (Users user : userList) {
             if (user.getIp().equals(ip)) {
                 user.addMessage(user.getName(), message);
+                if (peersTextPane.getSelectedValue().contains(user.getName())) {
+                    chatAreaTextPane.setText(chatAreaTextPane.getText() + "\n" + user.getName() + " : " + message);
+                }
                 break;
             }
         }
@@ -191,11 +249,15 @@ public class iomaGUI extends JFrame {
 
 
     public void addUser(String username, String ip){
+        //System.out.println(username + ":" + ip);
+        //System.out.println(thisUser.getName() + ":" + thisUser.getIp());
 
         if (!thisUser.equals(new Users(username, ip))) {
             if (!userList.contains(new Users(username, ip))) {
                 userList.add(new Users(username, ip));
-                System.out.println("Adding" + username);
+                System.out.println("Adding " + username);
+                System.out.println("IP" + ip);
+                model.addElement(username + " IP: " + ip);
                 //peersTextPane.setText(peersTextPane.getText() + "\n" + username + " " + ip);
                 //Add part to add user to list of gui
             }
@@ -205,10 +267,16 @@ public class iomaGUI extends JFrame {
     }
 
     public void removeUser(String username, String ip){
+        System.out.println("REMOVING");
+        System.out.println(username);
+        System.out.println(ip);
         if (userList.contains(new Users(username, ip))) {
+            System.out.println(model.contains(username + " IP: " + ip));
+            int location = model.indexOf(username + " IP: " + ip);
+            model.remove(location);
             userList.remove(new Users(username, ip));
+            System.out.println("Remove run");
             //Add part to remove user list of the gui
-
         }
 
     }
@@ -221,27 +289,24 @@ public class iomaGUI extends JFrame {
         String message = "A:" + username;
         buf = message.getBytes();
         //Send Message to broadcast
+        System.out.println("Conecting to server: " + message);
         while (interfaces.hasMoreElements()) {
             NetworkInterface networkInterface = (NetworkInterface) interfaces.nextElement();
 
             if (networkInterface.isLoopback() || !networkInterface.isUp()) {
                 continue; // Don't want to broadcast to the loopback interface
             }
-
             for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
                 InetAddress broadcast = interfaceAddress.getBroadcast();
                 if (broadcast == null) {
                     continue;
                 }
-
                 // Send the broadcast package!
                 try {
-                    System.out.println(broadcast);
+                    System.out.println("Send message to" + broadcast);
                     DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, broadcast, serverPort);
                     socket.send(sendPacket);
-
                 } catch (Exception e) {
-
                 }
             }
         }
@@ -258,5 +323,9 @@ public class iomaGUI extends JFrame {
         String ip = socket.getLocalAddress().getHostAddress();
         socket.close();
         return ip;
+    }
+
+    public void setServerIP(String ip) throws Exception {
+        this.serverIp = InetAddress.getByName(ip);
     }
 }

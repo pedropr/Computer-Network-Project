@@ -31,6 +31,10 @@ public class Users {
         this.name = name;
     }
 
+    public ArrayList<Messages> getMessageList() {
+        return this.messageList;
+    }
+
     public void addMessage(String from, String message) {
         messageList.add(new Messages(from, message));
     }
@@ -40,8 +44,7 @@ public class Users {
         if (this == o) return true;
         if (!(o instanceof Users)) return false;
         Users users = (Users) o;
-        return name.equals(users.name) &&
-                ip.equals(users.ip);
+        return name.equals(users.name);
     }
 
     @Override
