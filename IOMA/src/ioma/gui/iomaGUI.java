@@ -12,6 +12,8 @@ import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
@@ -89,9 +91,7 @@ public class iomaGUI extends JFrame {
         btnSend.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                /***************************************************************************************************************
-                 HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
-                 */
+
                 SimpleAttributeSet right = new SimpleAttributeSet();
                 StyleConstants.setAlignment(right, StyleConstants.ALIGN_RIGHT);
                 try {
@@ -178,18 +178,21 @@ public class iomaGUI extends JFrame {
         btnDownload.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                /***************************************************************************************************************
-                 HERE GOES THE FUNCTION FOR DOWNLOAD THE MESSAGES TO A FILE
-                 */
+              
               FileWriter writer;
               try
               {
-                writer = new FileWriter("output.txt");
+                writer = new FileWriter("messages.txt");
                 for (Users users : userList)
                 {
+                 System.out.println("Username:");
+                 System.out.println(users.getName()); 
                   writer.write(users.getName());
-                  for (Messages messages : users.getMessageList())
+                  ArrayList <Messages>userMessages = users.getMessageList();
+                  for (Messages messages : userMessages)
                   {
+                    System.out.println("Messages:");
+                    System.out.println(messages);
                     writer.write(messages.getFrom() + " : " + messages.getMessages());
                   }
                 }
@@ -199,9 +202,7 @@ public class iomaGUI extends JFrame {
               {
                 e.printStackTrace();
               } 
-             
-                
-              
+
               
               System.out.println("DOWNLOADING");
 
@@ -220,9 +221,7 @@ public class iomaGUI extends JFrame {
         btnDisconnect.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                /***************************************************************************************************************
-                 HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
-                 */
+
                 try {
                     String sendMessage = "R:" + thisUser.getName();
                     System.out.println("Removing user: " + sendMessage);

@@ -29,6 +29,7 @@ public class Messages {
     public String toString() {
         return "Messages{" +
                 "from='" + from + '\'' +
+                "message=" + this.messages +
                 '}';
     }
 }
