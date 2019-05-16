@@ -20,7 +20,6 @@ public class Program {
                 socket.receive(packet);
                 String received = new String(packet.getData());
                 System.out.println("Got Message. Message contains: " + received);
-                frame.setServerIP(packet.getAddress().getHostAddress());
                 if (received.contains("A:")) {// This to add a user.
                     //here goes parser
                     System.out.println("***ADDING****");
@@ -29,6 +28,7 @@ public class Program {
                     System.out.println(arrOfStr.length);
                     String username = arrOfStr[1];
                     String address = arrOfStr[0].replaceFirst("IP:", "");
+                    frame.setServerIP(packet.getAddress().getHostAddress());
 
                     //System.out.println("Adding Username: " + username + " IP address: " + ip);
 

@@ -5,9 +5,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
@@ -87,6 +92,8 @@ public class iomaGUI extends JFrame {
                 /***************************************************************************************************************
                  HERE GOES THE FUNCTION FOR SEND THE MESSAGE TO A PEER
                  */
+                SimpleAttributeSet right = new SimpleAttributeSet();
+                StyleConstants.setAlignment(right, StyleConstants.ALIGN_RIGHT);
                 try {
                     String sendMessage = messageTextArea.getText();
                     int location = peersTextPane.getSelectedIndex();
@@ -97,9 +104,8 @@ public class iomaGUI extends JFrame {
                     InetAddress ipto = InetAddress.getByName(items[1]);
                     byte[] sendBuff = sendMessage.getBytes();
                     DatagramSocket socket = new DatagramSocket();
-
-
-                    chatAreaTextPane.setText(chatAreaTextPane.getText() + "\n" + thisUser.getName() + " : " + sendMessage);
+                    
+                    chatAreaTextPane.setText(chatAreaTextPane.getText() + "\n" + thisUser.getName() + " : " + sendMessage);              
                     for (Users user : userList) {
                         if (user.getName().equals(items[0])) {
                             System.out.println("Sending to " + user.getName() + " with: " + sendMessage);
@@ -110,6 +116,7 @@ public class iomaGUI extends JFrame {
                             //System.out.println("SENDING MESSAGE");
                         }
                     }
+                    
                     messageTextArea.setText("");
                 } catch (Exception e) {
 
@@ -139,12 +146,14 @@ public class iomaGUI extends JFrame {
 
         //PEERS LIST
         peersTextPane = new JList<>(model);
+        peersTextPane.setFont(new Font("Calibri",Font.BOLD,14));
         peersTextPane.setBorder(new LineBorder(new Color(0, 0, 0)));
         peersTextPane.setBounds(12, 67, 200, 475);
         peersTextPane.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
+                  if(!peersTextPane.isSelectionEmpty()) {
                     String selected = peersTextPane.getSelectedValue().toString();
                     System.out.println("Value: " + selected);
                     String[] temp = selected.split(" IP: ");
@@ -155,7 +164,10 @@ public class iomaGUI extends JFrame {
                         chatAreaTextPane.setText(chatAreaTextPane.getText() + message.getFrom() + ": " + message.getMessages() + "\n");
                     }
                     //System.out.println(location);
+                }else {
+                  chatAreaTextPane.setText("");
                 }
+            }
             }
         });
         contentPane.add(peersTextPane);
@@ -169,7 +181,29 @@ public class iomaGUI extends JFrame {
                 /***************************************************************************************************************
                  HERE GOES THE FUNCTION FOR DOWNLOAD THE MESSAGES TO A FILE
                  */
-                System.out.println("DOWNLOADING");
+              FileWriter writer;
+              try
+              {
+                writer = new FileWriter("output.txt");
+                for (Users users : userList)
+                {
+                  writer.write(users.getName());
+                  for (Messages messages : users.getMessageList())
+                  {
+                    writer.write(messages.getFrom() + " : " + messages.getMessages());
+                  }
+                }
+                writer.close();
+              }
+              catch (IOException e)
+              {
+                e.printStackTrace();
+              } 
+             
+                
+              
+              
+              System.out.println("DOWNLOADING");
 
             }
         });
@@ -191,17 +225,46 @@ public class iomaGUI extends JFrame {
                  */
                 try {
                     String sendMessage = "R:" + thisUser.getName();
+                    System.out.println("Removing user: " + sendMessage);
                     byte[] sendBuff = sendMessage.getBytes();
                     DatagramSocket socket = new DatagramSocket();
                     DatagramPacket packet = new DatagramPacket(sendBuff, sendBuff.length, serverIp, serverPort);
                     socket.send(packet);
                     socket.close();
                     System.out.println("DISCONNECTING");
+                    System.out.println("server IP: " + serverIp);
                     //setVisible(false);
+                    chatAreaTextPane.setText(chatAreaTextPane.getText() + "\n" + thisUser.getName() + " : you are DISCONNECTED");
+                    
 
                 } catch (Exception e) {
 
                 }
+                try {
+                  String sendMessage = (" is DISCONNECTED");
+                  int location = peersTextPane.getSelectedIndex();
+                  String to = model.getElementAt(location);
+                  System.out.println("Checking here");
+                  System.out.println(to);
+                  String[] items = to.split(" IP: ");
+                  InetAddress ipto = InetAddress.getByName(items[1]);
+                  byte[] sendBuff = sendMessage.getBytes();
+                  DatagramSocket socket = new DatagramSocket();
+                  for (Users user : userList) {
+                      if (user.getName().equals(items[0])) {
+                          System.out.println("Sending to " + user.getName() + " with: " + sendMessage);
+                          user.addMessage(user.getName(), sendMessage);
+                          DatagramPacket packet = new DatagramPacket(sendBuff, sendBuff.length, ipto, clientPort);
+                          socket.send(packet);
+                          socket.close();
+                          //System.out.println("SENDING MESSAGE");
+                      }
+                  }
+                  
+                  messageTextArea.setText("");
+              } catch (Exception e) {
+
+              }
             }
         });
         contentPane.add(btnDisconnect);
@@ -280,6 +343,7 @@ public class iomaGUI extends JFrame {
         System.out.println(ip);
         if (userList.contains(new Users(username, ip))) {
             System.out.println(model.contains(username + " IP: " + ip));
+            peersTextPane.clearSelection();
             int location = model.indexOf(username + " IP: " + ip);
             model.remove(location);
             userList.remove(new Users(username, ip));
